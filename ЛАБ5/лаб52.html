@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Увеличение/уменьшение значения</title>
+<style>
+    #container {
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+<div id="container">
+    <button id="increaseBtn">+</button>
+    <span id="value" style="font-weight: bold;">0</span>
+    <button id="decreaseBtn">-</button>
+</div>
+
+<script>
+    const valueSpan = document.getElementById("value");
+    const increaseBtn = document.getElementById("increaseBtn");
+    const decreaseBtn = document.getElementById("decreaseBtn");
+
+    let value = 0;
+
+    function updateValue(newValue) {
+        value = newValue;
+        valueSpan.textContent = value;
+    }
+
+    increaseBtn.addEventListener("click", () => {
+        updateValue(value + 1);
+    });
+
+    decreaseBtn.addEventListener("click", () => {
+        updateValue(value - 1);
+    });
+</script>
+</body>
+</html>

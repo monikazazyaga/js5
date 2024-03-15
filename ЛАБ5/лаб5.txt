@@ -1,0 +1,112 @@
+Задача 1 (на таймеры)
+
+function counter(n) {
+  let interval = setInterval(() => {
+    console.log(n);
+    n--;
+    if (n < 0) {
+      clearInterval(interval);
+    }
+  }, 1000);
+}
+
+function createCounter(n) {
+  let current = n;
+
+  return {
+    start() {
+      counter(current);
+    },
+    pause() {
+      clearInterval(interval);
+    },
+    stop() {
+      current = n;
+      clearInterval(interval);
+    }
+  };
+}
+
+const myCounter = createCounter(5);
+myCounter.start();
+
+
+
+
+
+
+
+
+Задача 2 (на промисы)
+
+
+function delay(N) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+    }, N * 1000);
+  });
+}
+
+function countDown(N) {
+  if (N >= 0) {
+    console.log(N);
+    N--;
+    delay(1).then(() => countDown(N));
+  }
+}
+
+countDown(5);
+
+
+
+
+
+
+
+
+
+Задача 3 (на async/await)
+
+class HttpError extends Error {
+    constructor(response) {
+        super(`${response.status} for ${response.url}`);
+        this.name = 'HttpError';
+        this.response = response;
+    }
+}
+
+function loadJson(url) {
+    return fetch(url)
+        .then(response => {
+            if (response.status == 200) {
+                return response.json();
+            } else {
+                throw new HttpError(response);
+            }
+        });
+}
+
+//запрашивается логин, пока гид не вернёт существующего пользователя.
+async function getGithubUser() {
+    let user = null;
+  
+    while (!user) {
+        let name = prompt("Введите логин?", "iliakan");
+  
+        try {
+            user = await loadJson(`https://api.github.com/users/${name}`);
+            alert(`Полное имя: ${user.name}.`);
+        } catch (err) {
+            if (err instanceof HttpError && err.response.status == 404) {
+                alert("Такого пользователя не существует, пожалуйста, повторите ввод.");
+            } else {
+                throw err;
+            }
+        }
+    }
+  
+    return user;
+}
+
+getGithubUser();

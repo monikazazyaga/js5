@@ -1,0 +1,123 @@
+Посчитать максимум и минимум массива:
+const arr = [1, 6, -1, 22, 13];
+
+const arr = [1, 6, -1, 22, 13];
+const min = Math.min(...arr);
+const max = Math.max(...arr);
+console.log(`Минимум: ${min}, Максимум: ${max}`);
+
+
+
+
+
+Перевернуть строку задом наперёд:
+const str = "!тевирП";
+
+const str = "!тевирП";
+const reversedStr = str.split('').reverse().join('');
+console.log(reversedStr);
+
+
+
+
+Перевернуть введенную пользователем строку задом наперед.
+
+let userInput = prompt("Введите строку:");
+const reversedUserInput = userInput.split('').reverse().join('');
+console.log(reversedUserInput);
+
+
+
+
+Вычислить сумму квадратных корней для всех чётных чисел целочисленного массива:
+const arr = [3, 5, 8, 13, 21, 42];
+
+const arr = [3, 5, 8, 13, 21, 42];
+const sumOfSquaresOfEvenNumbers = arr.filter(num => num % 2 === 0).reduce((acc, curr) => acc + Math.sqrt(curr), 0);
+console.log(sumOfSquaresOfEvenNumbers);
+
+
+
+
+Написать функцию, которая проверяет, являются ли две строки анаграммой:
+anagram("Лунь", "нуль") // true
+anagram("Лунь", "ноль") // false
+
+function anagram(strA, strB) {
+    return strA.toLowerCase().split('').sort().join('') === strB.toLowerCase().split('').sort().join('');
+}
+console.log(anagram("Лунь", "нуль")); // true
+console.log(anagram("Лунь", "ноль")); // false
+
+
+
+
+
+Написать функцию, которая проверяет, является ли строка палиндромом:
+palindrome("Не гни папин ген") // true
+palindrome("123") // false
+
+function palindrome(str) {
+    const formattedStr = str.toLowerCase().replace(/[^a-zа-яё]/g, '');
+ if (formattedStr.length === 0) {
+        return false; 
+    }
+    const reversedStr = formattedStr.split('').reverse().join('');
+        return formattedStr === reversedStr;
+}
+
+console.log(palindrome("Не гни папин ген")); // true
+console.log(palindrome("123")); // false
+
+
+
+
+
+Написать функцию, которая после вызова каждую секунду пишет в консоль очередное число Фибоначчи. Так, в консоли будет: 0, 1, 1, 2, 3, 5, 8, 13...
+
+function fibonacciGenerator() {
+    let a = 0, b = 1;
+    
+    return function() {
+        const next = a;
+        a = b;
+        b = next + b;
+        return next;
+    };
+}
+
+const getNextFibonacci = fibonacciGenerator();
+
+setInterval(() => {
+    console.log(getNextFibonacci());
+}, 1000);
+
+
+
+
+Написать функцию intersect(arrA, arrB), принимающую на вход два массива и возвращающую пересечение значений этих массивов.
+
+function intersect(arrA, arrB) {
+    return arrA.filter(value => arrB.includes(value));
+}
+
+console.log(intersect([1, 2, 3], [2, 3, 4])); 
+
+
+
+
+
+
+Что выведет этот код? Как сделать так, чтобы он вывел 1, 2, 3?
+
+let i;
+for(i = 1; i <= 3; i++) {
+  setTimeout(() => console.log(i), 1000);
+}//код создаст 3 таймера с интервалом в 1 секунду, 
+каждый из которых выведет значение переменной i, 
+которое равно 4 из-за того, что при выполнении console.log(i) 
+будетиспользоваться значение i на момент завершения цикла, каждый таймер выведет число 4
+
+for(let i = 1; i <= 3; i++) {
+  setTimeout(() => console.log(i), 1000*i);
+}//код выведет числа с задержкой: сначала 1 через 1 секунду, потом 2 через 2 секунды и 3 через 3 секунды
